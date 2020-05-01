@@ -7,12 +7,12 @@ class Post(models.Model):
     post_date   = models.DateTimeField(auto_now_add=True)
     isbn_code       = models.CharField(max_length=13)
     review      = models.TextField(max_length=1000, default=0)
-    rabel       = models.CharField(default=None, max_length=15)
+    label       = models.CharField(default=None, max_length=15)
     star        = models.IntegerField(default=0)
     like        = models.IntegerField(default=0)
 
     def __str__(self):
-        return '%s (%s)' %(self.username, self.owner)
+        return '%s (PostID: %s)' %(self.username, self.id)
 
     class Asc_date:
         # - にしておくと昇順で表示
