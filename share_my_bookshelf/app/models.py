@@ -12,7 +12,7 @@ class Post(models.Model):
     like        = models.IntegerField(default=0)
 
     def __str__(self):
-        return '%s (%s)' %(self.content, self.owner)
+        return '%s (%s)' %(self.username, self.owner)
 
     class Asc_date:
         # - にしておくと昇順で表示
