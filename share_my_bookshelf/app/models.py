@@ -5,14 +5,16 @@ class Post(models.Model):
     username    = models.ForeignKey(User, on_delete=models.CASCADE, \
                   related_name = 'post_username')
     post_date   = models.DateTimeField(auto_now_add=True)
-    isbn_code       = models.CharField(max_length=13)
-    review      = models.TextField(max_length=1000, default=0)
+    isbn_code   = models.TextField(max_length=13, default="")
+    author      = models.TextField(default="")
+    title       = models.TextField(default="")
+    review      = models.TextField(max_length=1000, default="")
     label       = models.CharField(default=None, max_length=15)
     star        = models.IntegerField(default=0)
     like        = models.IntegerField(default=0)
 
     def __str__(self):
-        return '%s (PostID: %s)' %(self.username, self.id)
+        return '%s (written by: %s)' %(self.title, self.author)
 
     class Asc_date:
         # - にしておくと昇順で表示
