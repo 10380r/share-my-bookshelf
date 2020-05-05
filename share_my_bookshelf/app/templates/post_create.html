@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}投稿作成｜Book Diary{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <from method="POST" enctype='multipart/form-data'>
+            {% csrf_token %}
+            <table class="table">
+                {{ form.as_table }}
+            </table>
+            <button class="btn btn-primary" type="submit">投稿作成</button>
+        </from>
+    </div>
+</div>
+{% endblock %}
