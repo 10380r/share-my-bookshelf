@@ -4,15 +4,13 @@
 {% block title %}投稿作成｜Book Diary{% endblock %}
 
 {% block content %}
-<div class="container">
-    <div class="row">
-        <from method="POST" enctype='multipart/form-data'>
-            {% csrf_token %}
-            <table class="table">
-                {{ form.as_table }}
-            </table>
-            <button class="btn btn-primary" type="submit">投稿作成</button>
-        </from>
-    </div>
+<div>
+    <a href="{% url 'app:index' %}">ホームに戻る</a>
 </div>
+  
+<form action="{% url 'app:post_create' %}" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="保存" class="btn">
+</form>
 {% endblock %}

@@ -1,8 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
+from django.urls import reverse_lazy
 from .models import Post
-from .form import PostCreateForm
+from .forms import PostCreateForm
+from django.contrib import messages
 
 # TODO: 現時点ではログイン必須にはしない
 # @login_required(login_url='/admin/login')
@@ -10,25 +12,28 @@ def index(request):
     posts = Post.objects.all()
     params = {
         "login_user": request.user,
-        "contents": posts,
+        "posts": posts,
+        "form": PostCreateForm()
     }
     return render(request, "index.html", params)
 
-class PostCreateView(LoginRequiredMixin, generic.FormView):
-    model = Post
-    template_name = 'post_create.html'
-    #フォームクラスのオーバーライド
-    form_class = PostCreateForm
-    #正常に処理が完了した際の遷移先の設定→リストに移動
-    # success url = reverse_lazy('post:post_list')
+# @login_required(login_url='/admin/login/')
+def post_create(request):
+    form = PostCreateForm(request.POST, instance=Post())
+    if form.is_valid():
+        form.save()
+        print("ppp")
+    else:
+        print("lll")
+        form = PostCreateForm
+    print("KKKKK")
+    return redirect(to='/post_content')
 
-    def form_valid(self, form):
-        post = form.save(commit=False)
-        post.user = self.request.user
-        post.save()
-        massages.success(self.request, '投稿作成')
-        return super().form_valid(form)
-
-    def form_invalid(self, form):
-        messages.error(self.request, '投稿作成失敗')
-        return super().form_invalid(form)
+def post_content(request):
+    posts = Post.objects.all()
+    params = {
+        "login_user": request.user,
+        "posts": posts,
+        "form": PostCreateForm()
+    }
+    return render(request, "post_create.html", params)
