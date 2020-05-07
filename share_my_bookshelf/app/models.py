@@ -3,10 +3,8 @@ from django.db import models
 
 
 class Post(models.Model):
-    username = models.ForeignKey(
-        User, on_delete=models.CASCADE
-    )
-    isbn_code = models.IntegerField(default=0)
+    username = models.ForeignKey(User, on_delete=models.CASCADE)
+    isbn_code = models.CharField(default="0000000000000", max_length=13)
     post_date = models.DateTimeField(auto_now_add=True)
     review = models.TextField(max_length=1000, default="")
     label = models.CharField(default=None, max_length=15)
@@ -22,11 +20,13 @@ class Post(models.Model):
 
 
 class Book(models.Model):
-    isbn_code = models.ForeignKey(
-        Post, on_delete=models.CASCADE
-    )
-    author = models.TextField(default="")
+    isbn_code = models.ForeignKey(Post, on_delete=models.CASCADE)
     title = models.TextField(default="")
+    subtitle = models.TextField(default="")
+    authors = models.TextField(default="")
+    publishedDate = models.CharField(default=None, max_length=8)
+    description = models.TextField(default="")
+    img_url = models.TextField(default="")
 
 
 class Friend(models.Model):
