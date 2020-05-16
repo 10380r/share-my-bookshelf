@@ -8,13 +8,29 @@
 <div>
   <p class='login_user'>Hello, {{ request.user }}</p>
 </div>
-<div class="top_box"></div>
-  {% for post in posts %}
-  <div>
-      <p>{{ post.review }}</p>
-      <p>{{ post.isbn_code }}</p>
-      <p>{{ post.label }}</p>
-      <p>{{ post.star }}</p>
+{% for content in contents %}
+<hr>
+  <div class='post_content'>
+    <div class='message_owner_bar'>
+      <p class='message_owner'>{{ content.username }}</p>
+    </div>
+    <div class='book_content'>
+      <div class='isbn'>
+        <p class='book_content_isbn_code'>{{ content.isbn_code }}</p>
+      </div>
+      <div class='review'>
+        <p class='book_content_review'>{{ content.review }}</p>
+      </div>
+      <div class='star'>
+        <p class='book_content_star'>{{ content.star }}</p>
+      </div>
+    </div>
+    <div class='message_comment'>
+      <div class='comment>'>
+        <p class='message_date'>{{ content.post_date }}</p>
+      </div>
+      <br>
+    </div>
   </div>
   {% endfor %}
   <div>
@@ -22,8 +38,3 @@
   </div>
 </div>
 {% endblock %}
-
-
-
-
-
