@@ -18,24 +18,20 @@ def index(request):
     return render(request, "index.html", params)
 
 # @login_required(login_url='/admin/login/')
-def post_create(request):
-    form = PostCreateForm(request.POST, instance=Post())
-#     if form.is_valid():
-#         form.save()
-#         print("ppp")
-#     else:
-#         print("lll")
-#         form = PostCreateForm
-#     print("KKKKK")
-    return render(request, "post_create.html")
+def post(request):
+    params = {}
+    if request.method == 'POST':
+        post = Post()
+        post.username = request.user
+        post.review =  request.POST['review']
+        post.label =  request.POST['label']
+        post.star =  request.POST['star']
+        post.isbn_code = request.POST['isbn_code']
+        post.publishedDate = request.POST['publishedDate']
+        post.save()
+        return redirect(to='/')
 
-def post_content(request):
-    # form = PostCreateForm(request.POST, instance=Post())
-    form.save()
-    posts = Post.objects.all()
-    params = {
-        "login_user": request.user,
-        "posts": posts,
-        "form": PostCreateForm()
-    }
-    return render(request, "omdex.html", params)
+    else:
+        form = PostCreateForm()
+        params['form'] = form
+        return render(request, 'post_create.html', params)
