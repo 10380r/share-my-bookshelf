@@ -13,7 +13,6 @@ def index(request):
     params = {
         "login_user": request.user,
         "posts": posts,
-        "form": PostCreateForm()
     }
     return render(request, "index.html", params)
 
