@@ -15,14 +15,26 @@
       <p class='message_owner'>{{ post.username }}</p>
     </div>
     <div class='book_content'>
-      <div class='isbn'>
-        <p class='book_content_isbn_code'>{{ post.isbn_code }}</p>
+      <div class='title'>
+        <p class='book_content_title'>{{ post.title }}</p>
+      </div>
+      <div class='subtitle'>
+        <p class='book_content_sub_title'>{{ post.subtitle }}</p>
+      </div>
+      <div class='image_url'>
+        <p class='book_content_image_url'><img src = "{{ post.img_url }}"/>
+      </div>
+      <div class='authors'>
+        <p class='book_content_authors'>{{ post.authors }}</p>
       </div>
       <div class='review'>
         <p class='book_content_review'>{{ post.review }}</p>
       </div>
       <div class='star'>
         <p class='book_content_star'>{{ post.star }}</p>
+      </div>
+      <div class='isbn'>
+        <p class='book_content_isbn_code'>{{ post.isbn_code }}</p>
       </div>
     </div>
     <div class='message_comment'>

@@ -5,6 +5,7 @@ from django.urls import reverse_lazy
 from .models import Post
 from .forms import PostCreateForm
 from django.contrib import messages
+from .util.inquire_book_info import request_googleapi
 
 # TODO: 現時点ではログイン必須にはしない
 # @login_required(login_url='/admin/login')
@@ -22,11 +23,17 @@ def post(request):
     if request.method == 'POST':
         post = Post()
         post.username = request.user
+        post.isbn_code = request.POST['isbn_code']
+        book_info = request_googleapi("", "", post.isbn_code)
+        post.title = book_info['title']
+        post.subtitle = book_info['subtitle']
+        post.authors = ','.join(book_info['authors'])
+        post.publishedDate = book_info['publishedDate']
+        post.description = book_info['description']
+        post.img_url = book_info['image_url']
         post.review =  request.POST['review']
         post.label =  request.POST['label']
         post.star =  request.POST['star']
-        post.isbn_code = request.POST['isbn_code']
-        post.publishedDate = request.POST['publishedDate']
         post.save()
         return redirect(to='/')
 

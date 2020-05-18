@@ -5,4 +5,4 @@ class PostCreateForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ['username', 'isbn_code', 'review',
-        'label', 'star', 'like', 'was_read', 'publishedDate']
+        'label', 'star', 'was_read',]
