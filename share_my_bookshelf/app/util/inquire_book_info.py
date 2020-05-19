@@ -61,19 +61,28 @@ def parse_info(original_data):
     if original_data == {} or original_data["totalItems"] == 0:
         return base_info
 
+
+    if "title" in original_data["items"][0]["volumeInfo"]:
+        base_info["title"] = original_data["items"][0]["volumeInfo"]["title"]
+    if "subtitle" in original_data["items"][0]["volumeInfo"]:
+        base_info["subtitle"] = original_data["items"][0]["volumeInfo"]["subtitle"]
+    if "authors" in original_data["items"][0]["volumeInfo"]:
+        base_info["authors"] = original_data["items"][0]["volumeInfo"]["authors"]
+    if "publishedDate" in original_data["items"][0]["volumeInfo"]:
+        base_info["published_date"] = original_data["items"][0]["volumeInfo"][
+            "publishedDate"
+        ]
+    if "description" in original_data["items"][0]["volumeInfo"]:
+        base_info["description"] = original_data["items"][0]["volumeInfo"]["description"]
+    if "identifier" in original_data["items"][0]["volumeInfo"]["industryIdentifiers"][1]:
+        base_info["isbn13"] = original_data["items"][0]["volumeInfo"][
+            "industryIdentifiers"
+        ][1]["identifier"]
+    if "imageLinks" in original_data["items"][0]["volumeInfo"]:
+        base_info["image_url"] = original_data["items"][0]["volumeInfo"]["imageLinks"][
+            "thumbnail"
+        ]
+
     base_info["is_found"] = True
-    base_info["title"] = original_data["items"][0]["volumeInfo"]["title"]
-    base_info["subtitle"] = original_data["items"][0]["volumeInfo"]["subtitle"]
-    base_info["authors"] = original_data["items"][0]["volumeInfo"]["authors"]
-    base_info["published_date"] = original_data["items"][0]["volumeInfo"][
-        "publishedDate"
-    ]
-    base_info["description"] = original_data["items"][0]["volumeInfo"]["description"]
-    base_info["isbn13"] = original_data["items"][0]["volumeInfo"][
-        "industryIdentifiers"
-    ][1]["identifier"]
-    base_info["image_url"] = original_data["items"][0]["volumeInfo"]["imageLinks"][
-        "thumbnail"
-    ]
 
     return base_info
