@@ -28,7 +28,7 @@ def post(request):
         post.title = book_info['title']
         post.subtitle = book_info['subtitle']
         post.authors = ','.join(book_info['authors'])
-        post.publishedDate = book_info['publishedDate']
+        post.published_date = book_info['published_date']
         post.description = book_info['description']
         post.img_url = book_info['image_url']
         post.review =  request.POST['review']

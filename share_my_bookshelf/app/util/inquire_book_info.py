@@ -52,7 +52,7 @@ def parse_info(original_data):
         "title": "",
         "subtitle": "",
         "authors": [],
-        "publishedDate": "",
+        "published_date": "",
         "description": "",
         "isbn13": "",
         "image_url": "",
@@ -65,7 +65,7 @@ def parse_info(original_data):
     base_info["title"] = original_data["items"][0]["volumeInfo"]["title"]
     base_info["subtitle"] = original_data["items"][0]["volumeInfo"]["subtitle"]
     base_info["authors"] = original_data["items"][0]["volumeInfo"]["authors"]
-    base_info["publishedDate"] = original_data["items"][0]["volumeInfo"][
+    base_info["published_date"] = original_data["items"][0]["volumeInfo"][
         "publishedDate"
     ]
     base_info["description"] = original_data["items"][0]["volumeInfo"]["description"]
