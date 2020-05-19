@@ -111,3 +111,6 @@ dmypy.json
 
 # VSCode
 .vscode
+
+# app migration files
+share_my_bookshelf/app/migrations/

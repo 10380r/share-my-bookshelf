@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class='user_detail_content'>
+  <h2 class='username'>{{ user.username }}</h2>
+  <table border='1'>
+    {% for post in posts %}
+      {% if post.username == user %}
+      <tr>
+        <th><img src='{{ post.img_url }}' width='80px' height='auto'></th>
+        <td>{{ post.title }}</td>
+        <td>{{ post.authors }}</td>
+      </tr>
+      {% endif %}
+    {% endfor %}
+  </table>
+</div>
+{% endblock %}

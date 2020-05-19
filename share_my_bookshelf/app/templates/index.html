@@ -11,8 +11,10 @@
 {% for post in posts %}
 <hr>
   <div class='post_content'>
-    <div class='message_owner_bar'>
-      <p class='message_owner'>{{ post.username }}</p>
+    <div class='post_user'>
+      <p class='message_owner'>
+        <a href='user/{{ post.username.id }}'>{{ post.username }}</a>
+      </p>
     </div>
     <div class='book_content'>
       <div class='title'>
@@ -45,8 +47,5 @@
     </div>
   </div>
   {% endfor %}
-  <div>
-    <a href="{% url 'app:post' %}">新規投稿</a>
-  </div>
 </div>
 {% endblock %}
