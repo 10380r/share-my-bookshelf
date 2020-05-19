@@ -13,9 +13,10 @@ class Post(models.Model):
     title = models.TextField(default="")
     subtitle = models.TextField(default="")
     authors = models.TextField(default="")
-    publishedDate = models.CharField(default=None, max_length=8)
+    published_date = models.CharField(default=None, max_length=8)
     description = models.TextField(default="")
     img_url = models.TextField(default="")
+    was_read = models.BooleanField(default=False)
 
     def __str__(self):
         return "%s (Post ID: %s)" % (self.username, self.id)
