@@ -5,6 +5,9 @@ from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views import generic
 
+from itertools import groupby
+import json
+
 from .forms import PostCreateForm
 from .models import Post
 from .util.inquire_book_info import request_googleapi
@@ -51,10 +54,22 @@ def post(request):
 def userdetail(request, id):
     posts = Post.objects.all()
     user = User.objects.get(id=id)
+
+    filtered = list(filter(lambda post: post.username.id == id, posts))
+
+    # list<str>
+    labels_names = list(map(lambda post: post.label, posts))
+    labels_count = list(map(lambda label: labels_names.count(label), labels_names))
+
+    # ジャンル:個数 の辞書を作成する
+    # JSに渡すことを想定しているので同時にjsonに変換
+    labels_json = json.dumps({label : count for label, count in zip(labels_names, labels_count)})
+
     params = {
         "login_user": request.user,
         "user": user,
-        "posts": posts,
+        "posts": filtered,
+        "labels_json": labels_json
     }
 
     return render(request, "userpage.html", params)
