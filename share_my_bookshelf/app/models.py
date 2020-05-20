@@ -23,7 +23,7 @@ class Post(models.Model):
 
     class Asc_date:
         # - にしておくと昇順で表示
-        ordering = ("-pub_date",)
+        ordering = ("-published_date",)
 
 
 class Friend(models.Model):
