@@ -40,6 +40,7 @@ def post(request):
         post.img_url = book_info["image_url"]
         post.review = request.POST["review"]
         post.label = request.POST["label"]
+        print(request.POST["label"])
         post.star = request.POST["star"]
         post.save()
         return redirect(to="/")
