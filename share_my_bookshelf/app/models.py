@@ -37,6 +37,5 @@ class Friend(models.Model):
 
 
 class Like(models.Model):
-    user   = models.ForeignKey(User, on_delete=models.CASCADE,\
-              related_name='like_owner')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="like_owner")
     post = models.ForeignKey(Post, on_delete=models.CASCADE)

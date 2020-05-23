@@ -63,32 +63,35 @@ def userdetail(request, id):
 
     # ジャンル:個数 の辞書を作成する
     # JSに渡すことを想定しているので同時にjsonに変換
-    labels_json = json.dumps({label : count for label, count in zip(labels_names, labels_count)})
+    labels_json = json.dumps(
+        {label: count for label, count in zip(labels_names, labels_count)}
+    )
 
     params = {
         "login_user": request.user,
         "user": user,
         "posts": filtered,
-        "labels_json": labels_json
+        "labels_json": labels_json,
     }
 
     return render(request, "userpage.html", params)
 
-#@login_required(login_url='/admin/login/')
+
+# @login_required(login_url='/admin/login/')
 def like(request, post_id):
     post = Post.objects.get(id=post_id)
-    is_like  = Like.objects.filter(user=request.user).filter(post=post).count()
+    is_like = Like.objects.filter(user=request.user).filter(post=post).count()
 
     # いいね済みの場合はカウントしない
     if is_like > 0:
-        return redirect(to='/')
+        return redirect(to="/")
 
     # いいねカウント
     post.like_count += 1
     post.save()
 
-    like         = Like()
-    like.user   = request.user
+    like = Like()
+    like.user = request.user
     like.post = post
     like.save()
 
