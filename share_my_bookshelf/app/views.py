@@ -9,7 +9,7 @@ from itertools import groupby
 import json
 
 from .forms import PostCreateForm
-from .models import Post
+from .models import Post, Like
 from .util.inquire_book_info import request_googleapi
 
 
@@ -73,3 +73,23 @@ def userdetail(request, id):
     }
 
     return render(request, "userpage.html", params)
+
+#@login_required(login_url='/admin/login/')
+def like(request, post_id):
+    post = Post.objects.get(id=post_id)
+    is_like  = Like.objects.filter(user=request.user).filter(post=post).count()
+
+    # いいね済みの場合はカウントしない
+    if is_like > 0:
+        return redirect(to='/')
+
+    # いいねカウント
+    post.like_count += 1
+    post.save()
+
+    like         = Like()
+    like.user   = request.user
+    like.post = post
+    like.save()
+
+    return redirect(to="/")

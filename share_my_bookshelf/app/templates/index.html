@@ -48,6 +48,10 @@
       </div>
       <br>
     </div>
+    <div class='like'>
+      <a href="{% url 'app:like' post.id %}"><button> ♡ </button></a>
+      <span class='message_counter'>{{post.like_count}}likes</span>
+    </div>
   </div>
   {% endfor %}
 </div>

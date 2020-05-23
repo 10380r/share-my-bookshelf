@@ -8,7 +8,7 @@ class Post(models.Model):
     review = models.TextField(max_length=1000, default="")
     label = models.CharField(default=None, max_length=15)
     star = models.IntegerField(default=0)
-    like = models.IntegerField(default=0)
+    like_count = models.IntegerField(default=0)
     isbn_code = models.CharField(default="0000000000000", max_length=13)
     title = models.TextField(default="")
     subtitle = models.TextField(default="")
@@ -34,3 +34,9 @@ class Friend(models.Model):
 
     def __str__(self):
         return "%s (%s)" % (self.friend)
+
+
+class Like(models.Model):
+    user   = models.ForeignKey(User, on_delete=models.CASCADE,\
+              related_name='like_owner')
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
