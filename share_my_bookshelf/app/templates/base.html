@@ -1,0 +1,42 @@
+{% load static %}
+<!doctype html>
+<html>
+<head>
+  <meta chaset='utf-8'>
+  <title>{% block titile %}{% endblock %}</title>
+  <link rel='stylesheet' type='text/css' href="{% static 'css/style.css' %}" />
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.js"></script>
+  <script type="text/javascript" src="https://unpkg.com/chartjs-plugin-colorschemes"></script>
+</head>
+
+<header>
+  <div class='logo'>
+      <a href="{% url 'app:index' %}">ShareMyBookShelf</a>
+  </div>
+  <ul>
+    <li class='to_toppage'>
+      <a href="{% url 'app:index' %}">Timeline</a>
+    </li>
+    <li class='to_post'>
+      <a href="{% url 'app:post' %}">Share Book</a>
+    </li>
+    <li class='to_mypage'>
+      <!-- <a href="user/{{ request.user.id }}">My Shelf</a> -->
+      <a href="user/{{ request.user.id }}">My Shelf</a>
+    </li>
+    <li class='logout'>
+      <a href='/admin/logout?next=/'>Logout</a>
+    </li>
+  </ul>
+</header>
+
+<body>
+  <div class='content'>{% block content %}{% endblock %}</div>
+</body>
+<footer>
+  <hr>
+  <div>
+     <span style='float:right'>copyright 2020 Share My Bookshelf</span>
+  </div>
+</footer>
+</html>

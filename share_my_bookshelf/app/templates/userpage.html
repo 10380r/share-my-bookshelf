@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class='user_detail_content'>
+  <h2 class='username'>{{ user.username }}</h2>
+  <div>
+    <table border='1'>
+      {% for post in posts %}
+        {% if post.username == user %}
+        <tr>
+          <th><img src='{{ post.img_url }}' width='80px' height='auto'></th>
+          <td>{{ post.title }}</td>
+          <td>{{ post.authors }}</td>
+        </tr>
+        {% endif %}
+      {% endfor %}
+    </table>
+  </div>
+  <div class="chart">
+    <canvas id="bookChart"></canvas>
+    <input type="hidden" id="chartData" name="chartData" value="{{ labels_json }}">
+    <script type="text/javascript" src="{% static 'js/drawChart.js' %}"></script>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}投稿作成｜Book Diary{% endblock %}
+
+{% block content %}
+<form action="{% url 'app:post' %}" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="保存" class="btn">
+</form>
+{% endblock %}
