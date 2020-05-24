@@ -21,12 +21,22 @@
       <a href="{% url 'app:post' %}">Share Book</a>
     </li>
     <li class='to_mypage'>
-      <!-- <a href="user/{{ request.user.id }}">My Shelf</a> -->
-      <a href="user/{{ request.user.id }}">My Shelf</a>
+      <a href="{% url 'app:userdetail' request.user.id %}">My Shelf</a>
     </li>
-    <li class='logout'>
-      <a href='/admin/logout?next=/'>Logout</a>
+  </ul>
+  <ul>
+    {% if user.is_authenticated %}
+    <li>
+      <a href = "{%url 'account_logout' %}">Log Out</a>
     </li>
+    {% else %}
+    <li>
+      <a href = "{%url 'account_signup' %}">Sign Up</a>
+    </li>
+    <li>
+      <a href = "{%url 'account_login' %}">Log In</a>
+    </li>
+    {% endif %}
   </ul>
 </header>
 
@@ -39,4 +49,5 @@
      <span style='float:right'>copyright 2020 Share My Bookshelf</span>
   </div>
 </footer>
+
 </html>

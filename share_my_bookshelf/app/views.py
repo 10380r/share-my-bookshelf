@@ -1,15 +1,16 @@
+import json
+from itertools import groupby
+
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views import generic
 
-from itertools import groupby
-import json
+from accounts.models import CustomUser
 
 from .forms import PostCreateForm
-from .models import Post
+from .models import Like, Post
 from .util.inquire_book_info import request_googleapi
 
 
@@ -53,7 +54,8 @@ def post(request):
 # @login_required(login_url='/admin/login/')
 def userdetail(request, id):
     posts = Post.objects.all()
-    user = User.objects.get(id=id)
+
+    user = CustomUser.objects.get(id=id)
 
     filtered = list(filter(lambda post: post.username.id == id, posts))
 
@@ -63,13 +65,36 @@ def userdetail(request, id):
 
     # ジャンル:個数 の辞書を作成する
     # JSに渡すことを想定しているので同時にjsonに変換
-    labels_json = json.dumps({label : count for label, count in zip(labels_names, labels_count)})
+    labels_json = json.dumps(
+        {label: count for label, count in zip(labels_names, labels_count)}
+    )
 
     params = {
         "login_user": request.user,
         "user": user,
         "posts": filtered,
-        "labels_json": labels_json
+        "labels_json": labels_json,
     }
 
     return render(request, "userpage.html", params)
+
+
+# @login_required(login_url='/admin/login/')
+def like(request, post_id):
+    post = Post.objects.get(id=post_id)
+    is_like = Like.objects.filter(user=request.user).filter(post=post).count()
+
+    # いいね済みの場合はカウントしない
+    if is_like > 0:
+        return redirect(to="/")
+
+    # いいねカウント
+    post.like_count += 1
+    post.save()
+
+    like = Like()
+    like.user = request.user
+    like.post = post
+    like.save()
+
+    return redirect(to="/")
