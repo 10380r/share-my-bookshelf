@@ -1,15 +1,16 @@
+import json
+from itertools import groupby
+
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-from accounts.models import CustomUser
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views import generic
 
-from itertools import groupby
-import json
+from accounts.models import CustomUser
 
 from .forms import PostCreateForm
-from .models import Post, Like
+from .models import Like, Post
 from .util.inquire_book_info import request_googleapi
 
 
@@ -53,6 +54,7 @@ def post(request):
 # @login_required(login_url='/admin/login/')
 def userdetail(request, id):
     posts = Post.objects.all()
+
     user = CustomUser.objects.get(id=id)
 
     filtered = list(filter(lambda post: post.username.id == id, posts))

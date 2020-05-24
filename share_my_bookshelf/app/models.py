@@ -24,15 +24,6 @@ class Post(models.Model):
         # - にしておくと昇順で表示
         ordering = ('-pub_date',)
 
-# class Friend(models.Model):
-#     myself = models.ForeignKey(
-#         User, on_delete=models.CASCADE, related_name="friend_myself"
-#     )
-#     friend = models.ForeignKey(User, on_delete=models.CASCADE)
-
-#     def __str__(self):
-#         return "%s (%s)" % (self.friend)
-
 
 class Like(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name="like_owner")
