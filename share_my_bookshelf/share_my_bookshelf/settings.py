@@ -138,6 +138,7 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
+#メール認証にするため等後に追加する可能性あり
 # ACCOUNT_AUTHENTICATION_METHOD = 'email'
 # ACCOUNT_USERNAME_REQUIRED = False
 
