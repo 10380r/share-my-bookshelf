@@ -24,9 +24,20 @@
       <!-- <a href="user/{{ request.user.id }}">My Shelf</a> -->
       <a href="user/{{ request.user.id }}">My Shelf</a>
     </li>
-    <li class='logout'>
-      <a href='/admin/logout?next=/'>Logout</a>
+  </ul>
+  <ul>
+    {% if user.is_authenticated %}
+    <li>
+      <a href = "{%url 'account_logout' %}">Log Out</a>
     </li>
+    {% else %}
+    <li>
+      <a href = "{%url 'account_signup' %}">Sign Up</a>
+    </li>
+    <li>
+      <a href = "{%url 'account_login' %}">Log In</a>
+    </li>
+    {% endif %}
   </ul>
 </header>
 
