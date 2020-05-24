@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}Index{% endblock %}
+{% block header %}
+{% endblock %}
+
+{% block content %}
+<div>
+  <p class='login_user'>Hello, {{ request.user }}</p>
+</div>
+{% for post in posts %}
+<hr>
+  <div class='post_content'>
+    <div class='post_user'>
+      <p class='message_owner'>
+        <a href='user/{{ post.username.id }}'>{{ post.username }}</a>
+      </p>
+    </div>
+    <div class='book_content'>
+      <div class='title'>
+        <p class='book_content_title'>{{ post.title }}</p>
+      </div>
+      <div class='subtitle'>
+        <p class='book_content_sub_title'>{{ post.subtitle }}</p>
+      </div>
+      <div class='image_url'>
+        <p class='book_content_image_url'><img src = "{{ post.img_url }}"/>
+      </div>
+      <div class='authors'>
+        <p class='book_content_authors'>{{ post.authors }}</p>
+      </div>
+      <div class='review'>
+        <p class='book_content_review'>{{ post.review }}</p>
+      </div>
+      <div class='star'>
+        <p class='book_content_star'>{{ post.star }}</p>
+      </div>
+      <div class='isbn'>
+        <p class='book_content_isbn_code'>{{ post.isbn_code }}</p>
+      </div>
+      <div class='label'>
+        <p class='book_content_isbn_code'>{{ post.label }}</p>
+      </div>
+    </div>
+    <div class='message_comment'>
+      <div class='comment>'>
+        <p class='message_date'>{{ post.post_date }}</p>
+      </div>
+      <br>
+    </div>
+    <div class='like'>
+      <a href="{% url 'app:like' post.id %}"><button> ♡ </button></a>
+      <span class='message_counter'>{{post.like_count}}likes</span>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}
