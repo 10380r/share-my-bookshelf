@@ -21,8 +21,7 @@
       <a href="{% url 'app:post' %}">Share Book</a>
     </li>
     <li class='to_mypage'>
-      <!-- <a href="user/{{ request.user.id }}">My Shelf</a> -->
-      <a href="user/{{ request.user.id }}">My Shelf</a>
+      <a href="{% url 'app:userdetail' request.user.id %}">My Shelf</a>
     </li>
   </ul>
   <ul>
