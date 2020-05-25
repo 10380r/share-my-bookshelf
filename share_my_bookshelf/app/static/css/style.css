@@ -1,2 +1,57 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+JP');
+
+body {
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
 header{
+}
+.col-sm-4 {
+    padding:5px;
+}
+
+.book_content_title {
+    font-weight: bold;
+    font-size: 17px;
+}
+
+.book_content_authors {
+    font-size: 13px;
+}
+
+.post_content {
+    height: 700px;
+    border: solid 3px gray;
+    padding:0 20px;
+    margin: 10px 0;
+}
+
+.book_content {
+    height: 550px;
+}
+
+.title {
+    height: 30px;
+    text-align: center;
+}
+
+.image_url {
+    height: 200px;
+    text-align: center;
+}
+
+.review {
+    height: 170px;
+    border: solid 2px gray;
+    margin-bottom: 30px;
+}
+
+.book_content_star {
+    color: orange;
+    text-decoration : underline;
+}
+
+.book_content_label {
+    color: green;
+    text-decoration: underline;
 }
