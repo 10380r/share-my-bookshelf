@@ -2,6 +2,7 @@ import json
 from itertools import groupby
 
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
@@ -14,8 +15,7 @@ from .models import Like, Post
 from .util.inquire_book_info import request_googleapi
 
 
-# TODO: 現時点ではログイン必須にはしない
-# @login_required(login_url='/admin/login')
+@login_required(login_url="/account/login/")
 def index(request):
     posts = Post.objects.all()
     params = {
@@ -25,7 +25,7 @@ def index(request):
     return render(request, "index.html", params)
 
 
-# @login_required(login_url='/admin/login/')
+@login_required(login_url="/account/login/")
 def post(request):
     params = {}
     if request.method == "POST":
@@ -51,7 +51,7 @@ def post(request):
         return render(request, "post_create.html", params)
 
 
-# @login_required(login_url='/admin/login/')
+@login_required(login_url="/account/login/")
 def userdetail(request, id):
     posts = Post.objects.all()
 
@@ -79,7 +79,7 @@ def userdetail(request, id):
     return render(request, "userpage.html", params)
 
 
-# @login_required(login_url='/admin/login/')
+@login_required(login_url="/account/login/")
 def like(request, post_id):
     post = Post.objects.get(id=post_id)
     is_like = Like.objects.filter(user=request.user).filter(post=post).count()

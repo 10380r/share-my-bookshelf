@@ -21,7 +21,11 @@
       <a href="{% url 'app:post' %}">Share Book</a>
     </li>
     <li class='to_mypage'>
-      <a href="{% url 'app:userdetail' request.user.id %}">My Shelf</a>
+      {% if request.user.id is None %}
+        <a href = "{%url 'account_login' %}">My Shelf</a>
+      {% else %}
+        <a href="{% url 'app:userdetail' request.user.id %}">My Shelf</a>
+      {% endif %}
     </li>
   </ul>
   <ul>
