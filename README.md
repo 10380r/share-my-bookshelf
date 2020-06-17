@@ -16,4 +16,4 @@ $ python manage.py migration
 
 3. 実行手順
 `manage.py` がある階層で下記コマンドを実行  
-`python manage.py runserver`
+`$ python manage.py runserver`
