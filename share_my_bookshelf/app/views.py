@@ -60,7 +60,7 @@ def userdetail(request, id):
     filtered = list(filter(lambda post: post.username.id == id, posts))
 
     # list<str>
-    labels_names = list(map(lambda post: post.label, posts))
+    labels_names = list(map(lambda post: post.label, filtered))
     labels_count = list(map(lambda label: labels_names.count(label), labels_names))
 
     # ジャンル:個数 の辞書を作成する
