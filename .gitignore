@@ -114,3 +114,5 @@ dmypy.json
 
 # app migration files
 share_my_bookshelf/app/migrations/
+accounts/app/migrations/
+accounts/app/.DS_STORE
